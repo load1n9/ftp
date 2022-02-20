@@ -12,7 +12,7 @@ const _dirTimeFormats = [
   "2006-01-02  15:04",
 ];
 
-function parseRFC3659ListLine(
+export function parseRFC3659ListLine(
   line: string,
   _now: Date,
   _loc: string,
@@ -60,7 +60,7 @@ function parseRFC3659ListLine(
   e.name = line.substring(iWhitespace + 1);
   return e;
 }
-function parseLsListLine(line: string, now: Date, loc: string): Entry | null {
+export function parseLsListLine(line: string, now: Date, loc: string): Entry | null {
   const iWhitespace = line.indexOf(" ");
   if (iWhitespace == -1) {
     return null;
@@ -96,7 +96,7 @@ function parseLsListLine(line: string, now: Date, loc: string): Entry | null {
   e.setTime(line.substring(0, i), now, loc);
   return e;
 }
-function parseDirListLine(line: string, now: Date, loc: string): Entry | null {
+export function parseDirListLine(line: string, now: Date, loc: string): Entry | null {
   let i = line.indexOf(" ");
   if (i == -1) {
     return null;
@@ -132,7 +132,7 @@ function parseDirListLine(line: string, now: Date, loc: string): Entry | null {
   e.setTime(line.substring(0, i), now, loc);
   return e;
 }
-function parseHostedFTPLine(
+export function parseHostedFTPLine(
   line: string,
   now: Date,
   loc: string,
