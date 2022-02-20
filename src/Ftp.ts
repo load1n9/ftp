@@ -1,5 +1,5 @@
 
-const timeFormat = "20060102150405";
+const _timeFormat = "20060102150405";
 
 export enum EntryType {
   File,

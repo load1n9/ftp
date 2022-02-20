@@ -6,7 +6,7 @@ export class Scanner {
     this.bytes = str;
   }
 
-  nextFields(count: number) {
+  nextFields(count: number): string[] {
     const fields = new Array(count);
 
     for (let i = 0; i < count; i++) {
@@ -17,6 +17,7 @@ export class Scanner {
         break;
       }
     }
+    return fields;
   }
 
   next() {
