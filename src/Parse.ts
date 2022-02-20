@@ -12,7 +12,7 @@ const dirTimeFormats = [
     '2006-01-02  15:04',
 ];
 
-function parseRFC3659ListLine(line: string, now: Date, loc: string): Entry | null {
+function parseRFC3659ListLine(line: string, now: any, loc: any): Entry | null {
     const iSemicolon = line.indexOf(';');
     const iWhitespace = line.indexOf(' ');
     if (iSemicolon < 0 || iSemicolon > iWhitespace) {
@@ -56,7 +56,7 @@ function parseRFC3659ListLine(line: string, now: Date, loc: string): Entry | nul
     e.name = line.substring(iWhitespace + 1);
     return e;
 }
-function parseLsListLine(line: string, now: Date, loc: string): Entry | null {
+function parseLsListLine(line: string, now: any, loc: any): Entry | null {
     const iWhitespace = line.indexOf(' ');
     if (iWhitespace == -1) {
         return null;
@@ -89,10 +89,7 @@ function parseLsListLine(line: string, now: Date, loc: string): Entry | null {
         e.name = e.name.substring(0, e.name.length - 1);
         e.type = EntryType.Folder;
     }
-    const err = e.setTime(line.substring(0, i), now, loc);
-    if (err) {
-        return null;
-    }
+    e.setTime(line.substring(0, i), now, loc);
     return e;
 }
 function parseDirListLine(line: string, now: Date, loc: string): Entry | null {
@@ -128,10 +125,7 @@ function parseDirListLine(line: string, now: Date, loc: string): Entry | null {
         e.name = e.name.substring(0, e.name.length - 1);
         e.type = EntryType.Folder;
     }
-    const err = e.setTime(line.substring(0, i), now, loc);
-    if (err) {
-        return null;
-    }
+    e.setTime(line.substring(0, i), now, loc);
     return e;
 }
 function parseHostedFTPLine(line: string, now: Date, loc: string): Entry | null{
@@ -150,7 +144,7 @@ function parseHostedFTPLine(line: string, now: Date, loc: string): Entry | null{
     if (space == -1) {
         return null;
     }
-    e.size = parseInt(line.substring(space + 1), 10);
+    e.size = Number(line.substring(space + 1));
     if (isNaN(e.size)) {
         return null;
     }
@@ -167,10 +161,7 @@ function parseHostedFTPLine(line: string, now: Date, loc: string): Entry | null{
         e.name = e.name.substring(0, e.name.length - 1);
         e.type = EntryType.Folder;
     }
-    const err = e.setTime(line.substring(0, i), now, loc);
-    if (err) {
-        return null;
-    }
+    e.setTime(line.substring(0, i), now, loc);
     return e;
 }
 export function parseListLine(line: string, now: Date, loc: string): Entry | null {
