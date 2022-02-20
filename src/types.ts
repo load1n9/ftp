@@ -5,3 +5,10 @@ export interface Item {
   entry: Entry;
   err?: Error;
 }
+
+export interface ConnectTlsOptions {
+  caCerts?: string[];
+  certFile?: string;
+  hostname?: string;
+  port: number;
+}
